@@ -4,13 +4,26 @@ import pandas as pd
 from database import Database
 from cv_processor import CVProcessor
 import json
-
+import os
 
 def main():
     st.title("CV Analysis and Matching System")
 
+    # Add API key input in sidebar
+    api_key = st.sidebar.text_input("Enter Google API Key", type="password")
+    if not api_key:
+        st.warning("Please enter your Google API Key in the sidebar to proceed")
+        return
+
+    # Set the API key as an environment variable
+    os.environ['GOOGLE_API_KEY'] = api_key
+
     db = Database()
-    cv_processor = CVProcessor()
+    try:
+        cv_processor = CVProcessor()
+    except ValueError as e:
+        st.error(str(e))
+        return
 
     # Sidebar navigation
     page = st.sidebar.selectbox(

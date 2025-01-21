@@ -1,3 +1,4 @@
+# cv_processor.py
 import os
 import json
 from typing import Dict
@@ -5,12 +6,11 @@ from pdfminer.high_level import extract_text
 import google.generativeai as genai
 from google.generativeai import GenerativeModel
 
-
 class CVProcessor:
     def __init__(self):
         api_key = os.getenv('GOOGLE_API_KEY')
         if not api_key:
-            raise ValueError("GOOGLE_API_KEY environment variable not set")
+            raise ValueError("Please enter your Google API Key in the sidebar")
         genai.configure(api_key=api_key)
         self.model = GenerativeModel('gemini-pro')
 
