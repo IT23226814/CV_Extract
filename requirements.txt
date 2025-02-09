@@ -1,3 +1,0 @@
-google.generativeai
-pdfminer.six
-streamlit
